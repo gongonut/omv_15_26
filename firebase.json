@@ -1,0 +1,14 @@
+{
+  "hosting": {
+    "site": "omvpage",
+    "public": "dist/omv-15",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "frameworksBackend": {
+      "region": "us-central1"
+    }
+  }
+}

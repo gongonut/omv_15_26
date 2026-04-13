@@ -1,0 +1,19 @@
+<div class="flex-1 mx-2 mt-2 overflow-auto">
+  <div class="flex flex-row flex-wrap gap-4">
+    @for (titCat of catList; track titCat) {
+      <div class="flex">
+        <div class="w-36">
+          <img class="h-48 w-32 object-fill overflow-hidden" [src]="getImage(titCat)" alt="item.descripcion_comercial"/>
+        </div>
+        <div class="w-36">
+          <div class="mt-2 font-medium text-lg">{{titCat.categ}}</div>
+          @for (subcat of titCat.subcateg; track subcat) {
+            <div class="ml-2 mt-2 text-gray-600 hover:text-black cursor-pointer">
+              <span (click)="onSelSub(titCat.categ, subcat)">{{subcat}}</span>
+            </div>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</div>

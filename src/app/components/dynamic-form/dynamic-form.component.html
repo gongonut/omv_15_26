@@ -1,0 +1,99 @@
+<form [formGroup]="dynaForm" (ngSubmit)="onSubmit()">
+  <div>
+    @for (control of jsonFormData.controls; track control.name) {
+      <div class="flex ">
+        @if (control.type === 'header') {
+          <div>
+            <p [ngClass]="ongetStyleClass(control)">{{ control.default }}</p>
+          </div>
+        }
+
+        @if ([
+          'text',
+          'password',
+          'email',
+          'number',
+          'search',
+          'tel',
+          'url',
+          'date',
+          'datetime-local',
+          'time',
+          'textarea',
+          'select',
+          'multiselect',
+        ].includes(control.type)) {
+          <mat-form-field appearance="outline" [ngClass]="ongetStyleClass(control)">
+            @if (control.label !== '') {
+              <mat-label>{{ control.label }}</mat-label>
+            }
+
+            @if ([
+              'text',
+              'password',
+              'email',
+              'number',
+              'search',
+              'tel',
+              'url',
+              'date',
+              'datetime-local',
+              'time'
+            ].includes(control.type)) {
+              <input matInput [type]="control.type" [formControlName]="control.name" [value]="control.avalue"
+                (change)="onSetData()">
+            }
+
+            @if (control.type === 'textarea') {
+              <textarea matInput [formControlName]="control.name" [value]="control.avalue"
+                [rows]="control.totalRows || 1" (change)="onSetData()"></textarea>
+            }
+
+            @if (control.type === 'select') {
+              <mat-select [formControlName]="control.name" [(value)]="control.avalue" (selectionChange)="onSetData()">
+                @for (selecItem of control.selectOptions; track selecItem.key) {
+                  <mat-option [value]="selecItem.key">
+                    {{selecItem.value}}
+                  </mat-option>
+                }
+              </mat-select>
+            }
+
+            @if (control.type === 'multiselect') {
+              <mat-select [formControlName]="control.name" [(value)]="control.avalue" (selectionChange)="onSetData()" multiple>
+                @for (selecItem of control.selectOptions; track selecItem.key) {
+                  <mat-option [value]="selecItem.key">
+                    {{selecItem.value}}
+                  </mat-option>
+                }
+              </mat-select>
+            }
+          </mat-form-field>
+        }
+
+        @if (control.type === 'checkbox') {
+          <div style="height:40px;" [ngStyle]="ongetStyleClass(control)" class="mat-form-field">
+            <mat-checkbox [formControlName]="control.name" [checked]="getBoolState(control.name)"
+              (change)="setBoolState($event, control.name)"></mat-checkbox>
+            {{control.label}}
+          </div>
+        }
+
+        @if ((control.sideBtn && control.sideBtn.length > 0) || (editBtn && editBtn.length > 0)) {
+          <button
+            class="ml-1 mt-1 h-[3.2rem] w-14 bg-white font-semibold text-violet-500 border border-gray-200 rounded shadow-sm"
+            (click)="onBtnClick($event, control)">
+            <mat-icon>{{getIcon(control)}}</mat-icon>
+          </button>
+        }
+      </div>
+    }
+
+      <!--
+      <button *ngIf="(control.sideBtn && control.sideBtn.length > 0) || (editBtn && editBtn.length > 0)" mat-icon-button
+        matSuffix class="text-violet-500 mt-0" (click)="onBtnClick($event, control)">
+        <mat-icon>{{getIcon(control)}}</mat-icon>
+      </button>
+      -->
+    </div>
+</form>

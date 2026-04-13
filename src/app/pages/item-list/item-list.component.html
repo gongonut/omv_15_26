@@ -1,0 +1,34 @@
+<div class="flex flex-col h-screen bg-slate-100">
+  <app-nav-bar (submenuSelected)="onSelected($event)" (whishCatSelected)="onCatWishSel()"></app-nav-bar>
+  <div>
+    <div class="flex m-1 h-8 p-2 font-medium text-white bg-black border border-slate-200 cursor-pointer"
+      (click)="getCat()">
+      {{storage.filter.catFilter[0]}}:&nbsp;{{storage.filter.catFilter[1]}}
+
+      <svg class="ml-3 w-4 h-4 text-yellow-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+        viewBox="0 0 20 20">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+      </svg>
+    </div>
+  </div>
+
+  @if (!catView) {
+    <div class="flex flex-row flex-wrap justify-center md:justify-start bg-slate-100 overflow-auto">
+      @for (item of storage.itemList2Show; track item) {
+        <div>
+          @if (filterItem(item)) {
+            <app-item [item]="item" (onClicked)="itemClicked(item)"></app-item>
+          }
+        </div>
+      }
+    </div>
+  }
+
+  @if (catView) {
+    <div class="flex flex-row flex-wrap justify-center md:justify-start bg-slate-100 overflow-auto">
+      <app-catalog [catList]="catList" (filterSelected)="onFilterSelected($event)"></app-catalog>
+    </div>
+  }
+
+</div>

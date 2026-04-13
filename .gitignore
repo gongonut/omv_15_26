@@ -1,0 +1,30 @@
+# Material de Angular/Node
+node_modules/
+dist/
+.angular/
+
+# Archivos de log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDEs y editores
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Entorno
+.env
+.env.local
+
+# Pruebas y cobertura
+/coverage
+/.nyc_output

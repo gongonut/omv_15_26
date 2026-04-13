@@ -1,0 +1,48 @@
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap');
+
+html, body { height: 100%; }
+// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+/*
+@layer base {s
+    https://www.youtube.com/watch?v=pONeWAzDsQg
+    [type='text'],
+    [type='email'],
+    [type='url'],
+    [type='password'],
+    [type='date'],
+    [type='datetime-local'],
+    [type='month'],
+    [type='search'],
+    [type='tel'],
+    [type='time'],
+    [type='week'],
+    [type='number'],
+     textarea {
+        @apply w-full border-gray-300 px-3 py-2 rounded-md shadow-sm focus:outline-none focus:border-violet-500 focus:ring-violet-500;
+    }
+
+    [type='checkbox'],
+    [type='radio'] {
+        @apply w-4 h-4 focus:outline-none rounded focus:border-violet-500 focus:ring focus:ring-violet-500;
+    }
+}
+*/
+
+// Style to fix the weird border with angular material
+// https://stackoverflow.com/questions/75535246/angular-mat-form-field-not-working-properly-a-border-line-appears-inside-the-f
+.mdc-notched-outline__notch {
+    border-right: none !important;
+  }
+
+.poll-text-box {
+    @apply border border-gray-200 py-1 px-2 min-h-[3.2rem] rounded shadow-sm
+}
+.custom-dialog-container .mat-dialog-container {
+    /* add your styles */
+    padding: 0;
+}

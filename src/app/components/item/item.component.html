@@ -1,0 +1,14 @@
+<div class="m-1 h-96 w-56 flex flex-col items-center rounded-sm border border-slate-200 bg-white hover:shadow-2xl">
+    <img class="h-48 rounded-full object-fill overflow-hidden" [src]="getImage()" alt="item.descripcion_comercial" (click)="onClick()"/>
+    <div class="grow flex flex-col text-center items-center gap-y-1 px-4" (click)="onClick()">
+        <div class="h-12 font-medium overflow-hidden">{{item.descripcion_comercial}} - {{item.familia}}</div>
+        <div class="h-20 text-center text-sm text-gray-400 overflow-auto">{{getDescArea()}}</div>
+    </div>
+    <!--<div [ngClass]="ongetItemBarColor()">-->
+    <div class="h-11 w-56 p-2 flex bg-lime-100 border-x rounded-b-sm">
+        <div class="grow pt-1 font-medium text-sm">Existencia: {{item.existencia | number}}</div>
+        <mat-icon class="hover:text-red-700" fontIcon="add_shopping_cart" (click)="onClickADV()"></mat-icon>
+        <mat-icon class="hover:text-red-700" fontIcon="favorite" (click)="add2Favorite()"></mat-icon>
+        
+    </div>
+</div>

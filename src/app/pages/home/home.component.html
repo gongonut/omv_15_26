@@ -1,0 +1,49 @@
+<div class="flex flex-col h-full">
+    <app-nav-bar (submenuSelected)="onSelected($event)"> </app-nav-bar>
+    <div class="p-4 overflow-auto">
+        <div id="t0" [ngClass]="getHover(0)">
+            <h1 class="text-2xl font-semibold">Quienes somos</h1>
+            <p class="px-6 text-justify">OMV PUBLICIDAD SAS: Somos una empresa con más de 20 años de experiencia en el
+                MEDIO DE LAS COMUNICACIONES con unidades de negocio como: <span class="font-semibold">VENTA Y
+                    DISTRIBUCION DE PRODUCTOS PROMOCIONALES Y DE MERCHANDISING, RADIO REGIONAL, PUBLICIDAD OUTDOOR E
+                    INDOOR, PIEZAS AUDIOVISUALES.</span> Somos proveedores de importantes agencias del país y clientes
+                de relevancia de diferentes sectores. Con Ellos nos hemos logrado posicionar como una empresa seria y
+                cumplidora de sus compromisos. <span class="font-semibold">FIEL A SU MISION!</span></p>
+            <div class="mt-4"></div>
+        </div>
+        <div id="t1" [ngClass]="getHover(1)">
+            <h1 class="text-2xl font-semibold">Ubicación</h1>
+            <p class="px-6 text-justify">Calle 3 No. 25-399 Edificio Calle TRES. Oficina 11. Poblado Medellín.</p>
+            <div class="mt-4"></div>
+        </div>
+        <div id="t2" [ngClass]="getHover(2)">
+            <h1 class="text-2xl font-semibold">Contacto</h1>
+            <div class="px-6">
+                <span class="mt-2 flex">
+                    <div class="w-72 font-semibold">Teléfonos de contacto</div>
+                    3206889697
+                </span>
+                <span class="mt-2 flex">
+                    <div class="w-72 font-semibold">Teléfono fijo</div>
+                    6043218357
+                </span>
+                <span class="mt-2 flex">
+                    <div class="w-72 font-semibold">Correo facturación electrónica</div>
+                    <a class="text-blue-800 underline" href="gerente@omvpublicidad.com">gerente&#64;omvpublicidad.com</a>
+                </span>
+                <span class="mt-2 flex">
+                    <div class="w-72 font-semibold">Correos de contacto comercial</div>
+                    <div class="mt-2 flex flex-wrap gap-2">
+                        <div>
+                            <a class="text-blue-800 underline"
+                                href="comercial@omvpublicidad.com">comercial&#64;omvpublicidad.com</a>
+                        </div>
+                        <div><a class="text-blue-800 underline"
+                                href="gerente@omvpublicidad.com">gerente&#64;omvpublicidad.com</a></div>
+                    </div>
+                </span>
+            </div>
+        </div>
+    </div>
+
+</div>

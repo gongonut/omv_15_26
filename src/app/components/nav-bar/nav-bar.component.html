@@ -1,0 +1,88 @@
+@if (!storage.screenShort) {
+  <div class="sticky top-0 z-1000 flex flex-row align-text-top h-28 px-3 bg-white border-b border-gray-300 cursor-pointer">
+    <img 
+    class="h-18 w-52 object-fill" [src]="'../assets/images/default-logo.png'" alt="omvpublicidadsas"
+    (click)="onMenuNav(1)"/>
+    <div class="grow">
+      <div class="flex pl-32 pt-7 gap-x-6 text-2xl text-gray-600">
+        <div [ngClass]="ongetClass(0)" (click)="onMenuNav(0)">{{menuList[0].title}}</div>
+        <div [ngClass]="ongetClass(1)" (click)="onMenuNav(1)">{{menuList[1].title}}</div>
+        <!--
+        <div [ngClass]="ongetClass(2)" (click)="onMenuNav(2)">{{menuList[2].title}}</div>
+        -->
+        <div class="grow"></div>
+        <mat-icon matBadge="{{wishTtl}}" matBadgeColor="warn" [matBadgeHidden]="wishTtl === 0"
+        class="hover:text-red-700" fontIcon="favorite"(click)="wishQuoteModule('0')"></mat-icon>
+        <mat-icon matBadge="{{cotizaTtl}}" matBadgeColor="warn" [matBadgeHidden]="cotizaTtl === 0"
+          class="hover:text-red-700" fontIcon="shopping_cart" (click)="wishQuoteModule('1')"></mat-icon>
+        <img class="h-8 object-fill" src="../assets/images/whatsapp-top.png" alt="omvpublicidadsas"
+          (click)="getWhatsApp()" />
+      </div>
+      <div class="h-2"></div>
+      <div class="pt-1 h-9 flex justify-center items-center gap-4 bg-black divide-x">
+        @for (submenu of menuList[this.storage.selMenu[0]].subMenus; track i; let i = $index) {
+          <div [ngClass]="ongetSubClass(i)" (click)="onSubMenu(i)">
+            {{submenu}}
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+ }
+@if (storage.screenShort) {
+  <div
+    class="sticky top-0 z-1000 flex flex-col w-full items-start align-top h-24 p-1 bg-white border-b border-gray-300 cursor-pointer">
+    <div class="w-full flex flex-row">
+      <img
+      class="h-14 w-24 mt-2 object-fill" src="../assets/images/default-logo.png" alt="omvpublicidad"
+      (click)="onMenuNav(1)"/>
+      <div class="flex-1"></div>
+      <div class="mt-5 flex gap-2">
+        <mat-icon matBadge="{{wishTtl}}" matBadgeColor="warn" [matBadgeHidden]="wishTtl === 0"
+        class="w-6 hover:text-red-700" fontIcon="favorite_border" (click)="wishQuoteModule('0')"></mat-icon>
+        <mat-icon matBadge="{{cotizaTtl}}" matBadgeColor="warn" [matBadgeHidden]="cotizaTtl === 0"
+          class="w-6 hover:text-red-700" fontIcon="add_shopping_cart" (click)="wishQuoteModule('1')"></mat-icon>
+          <mat-icon fontIcon="chat_bubble_outline" (click)="getWhatsApp()"></mat-icon>
+      </div>
+    </div>
+    <div class="w-screen flex flex-row justify-center text-xl bg-black text-white">
+      <div [matMenuTriggerFor]="pagemenu">
+        {{menuList[this.storage.selMenu[0]].title}}:
+      </div>
+      &nbsp;
+      <div>
+        <div class="text-yellow-200" [matMenuTriggerFor]="submenu">
+          {{menuList[storage.selMenu[0]].subMenus[storage.selMenu[1]] || 'Seleccione...'}}
+        </div>
+        
+      </div>
+    </div>
+  </div>
+}
+@if (nvg.showProgress) {
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+}
+
+<!--
+<mat-menu #headmenu="matMenu">
+  <button mat-menu-item (click)="onMenuNav(0)">Inicio</button>
+  <button mat-menu-item [matMenuTriggerFor]="catmenu">Catálogos</button>
+  <button mat-menu-item (click)="onMenuNav(2)">Contacto</button>
+</mat-menu>
+-->
+
+<mat-menu #pagemenu="matMenu">
+  @for (submenu of menuList; track i; let i = $index) {
+    <button mat-menu-item (click)="onMenuNav(i)">
+      {{submenu.title}}
+    </button>
+  }
+</mat-menu>
+
+<mat-menu #submenu="matMenu">
+  @for (submenu of menuList[storage.selMenu[0]].subMenus; track i; let i = $index) {
+    <button mat-menu-item (click)="onSubMenu(i)">
+      {{submenu}}
+    </button>
+  }
+</mat-menu>

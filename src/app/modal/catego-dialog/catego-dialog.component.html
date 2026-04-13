@@ -1,0 +1,43 @@
+<div class="flex flex-col h-full">
+    <h1 class="h-14 p-3 text-9xl bg-black text-white">{{data.title}}</h1>
+    <div class="relative flex w-full px-2 pb-2 border-b border-gray-200">
+
+        <input class="flex-1 px-2 focus:border-gray-400" type="text" id="simple-search" placeholder="Buscar artículo por Nombre o Código"
+            (change)="getValue($event)" required>
+
+        <button
+            class="p-2.5 ml-2 text-sm font-medium text-white bg-gray-700 rounded-lg border border-gray-700 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            (click)="onSearch()">
+            <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+            </svg>
+            <span class="sr-only">Search</span>
+        </button>
+    </div>
+    <app-catalog [catList]="catList" (filterSelected)="onFilterSelected($event)"></app-catalog>
+    <!--
+
+    <div class="flex-1 mx-2 mt-2 overflow-auto">
+        <div class="flex flex-row flex-wrap gap-4">
+            <div class="flex" *ngFor="let titCat of catList">
+                <div class="w-36">
+                    <img class="h-48 w-32 object-fill overflow-hidden" [src]="getImage(titCat)" alt="item.descripcion_comercial"/>
+                </div>
+                <div class="w-36">
+                    <div class="mt-2 font-medium text-lg">{{titCat.categ}}</div>
+                    <div class="ml-2 mt-2 text-gray-600 hover:text-black cursor-pointer" *ngFor="let subcat of titCat.subcateg">
+                        <span (click)="onSelSub(titCat.categ, subcat)">{{subcat}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    -->
+
+<!--
+
+    <app-catalog [catList]="catList"></app-catalog>
+-->
+
+</div>
