@@ -1,11 +1,11 @@
 <div class="p-2 h-full w-full">
   <div class="sticky top-0 z-1000 bg-white">
     <div class="pt-4 flex gap-2 justify-end	">
-      <mat-icon matBadge="{{wishTtl}}" matBadgeColor="warn" [matBadgeHidden]="wishTtl === 0"
+      <mat-icon matBadge="{{wishTtl}}" matBadgeColor="warn" [matBadgeHidden]="wishTtl === 0" aria-hidden="false"
         class="w-6 hover:text-red-700" fontIcon="favorite_border" (click)="wishQuoteModule('0')"></mat-icon>
-      <mat-icon matBadge="{{cotizaTtl}}" matBadgeColor="warn" [matBadgeHidden]="cotizaTtl === 0"
+      <mat-icon matBadge="{{cotizaTtl}}" matBadgeColor="warn" [matBadgeHidden]="cotizaTtl === 0" aria-hidden="false"
         class="w-6 hover:text-red-700" fontIcon="add_shopping_cart" (click)="wishQuoteModule('1')"></mat-icon>
-      <mat-icon fontIcon="chat_bubble_outline" (click)="getWhatsApp()"></mat-icon>
+      <mat-icon fontIcon="chat_bubble_outline" (click)="getWhatsApp()" aria-hidden="false"></mat-icon>
     </div>
 
     <div
@@ -47,7 +47,8 @@
         </mat-form-field>
         <div class="h-2"></div>
         <div class="flex flex-row items-start h-28 w-full overflow-x-auto">
-          @for (imgSM of imageSMList; track i; let i = $index) {
+          <!-- Corregido: track debe usar una expresión disponible, $index es lo ideal aquí -->
+          @for (imgSM of imageSMList; track $index; let i = $index) {
             <div>
               <div class="h-20 w-24">
                 <img class="h-20 w-24 object-fill border border-gray-200" [src]="imgSM" alt="" (click)="setImage(i)" />

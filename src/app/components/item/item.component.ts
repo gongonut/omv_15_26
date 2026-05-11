@@ -17,7 +17,7 @@ export class ItemComponent {
   @Output() onClicked = new EventEmitter<Item>();
 
   getImage(): string {
-    
+    console.log('ItemComponent getImage', this.item);
     // if (this.item.imagen && this.item.imagen.imagen && this.item.imagen.imagen.file_sm) { return this.item.imagen.imagen.file_sm || ''; }
     if (this.item.imagen && this.item.imagen.length > 0) { return this.item.imagen; }
     return '';
@@ -31,11 +31,14 @@ export class ItemComponent {
   */
 
   onClick() {
+    
     this.item.tag = 'select';
+    console.log('ItemComponent onClick', this.item);
     this.onEmit();
   }
 
   onClickADV() {
+    
     this.item.tag = 'select_ADV';
     this.onEmit();
   }

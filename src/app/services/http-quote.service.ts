@@ -51,6 +51,7 @@ export class HttpQuoteService {
   }
 
   getOMARPICOCats(): Observable<Item[]> { // Assuming marpico returns Item[] directly
+    debugger;
     return this.httpq.get<Item[]>(`${this.storage.QUOTE_SERVER}marpico`);
   }
 
@@ -62,6 +63,7 @@ export class HttpQuoteService {
     if (this.storage.selCatalogTitle === catName && this.storage.itemList2Show.length > 0) {
       return true;
     }
+    debugger;
     try {
       const data = await firstValueFrom(fetchObservable);
       // Adjust based on actual API response structure
@@ -82,12 +84,15 @@ export class HttpQuoteService {
   }
 
   async getMARPICOCatsDataPromise(catName: string) {
+    
     if (this.storage.selCatalogTitle === catName && this.storage.itemList2Show.length > 0) {
       return true;
     }
     try {
+      debugger;
       const data = await firstValueFrom(this.getOMARPICOCats());
       this.storage.itemList2Show = data as Item[];
+      console.log('MARPICO cats fetched:', this.storage.itemList2Show);
       // CORRECCIÓN: Llamar al resolver de MARPICO
       if (this.storage.itemList2Show.length > 0) { await this.storage.resolveDataMARPICO(this.storage.itemList2Show); }
       this.storage.selCatalogTitle = catName;

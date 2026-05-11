@@ -4,8 +4,11 @@
         @if (page === 0) {
             <div>
                 @for (item of data.value.itemList; track item; let i = $index) {
-                    <div class="flex flex-row flex-wrap border-b border-gray-200">
-                        <img class="pt-2 h-24 w-24" [src]="getImage(item)" alt="item.descripcion_comercial"
+                    <div class="flex flex-row flex-wrap border-b border-gray-200" [class.image-error]="item.imageError">
+                        <img class="pt-2 h-24 w-24"
+                            [src]="getImage(item)"
+                            alt="{{item.descripcion_comercial}}"
+                            (error)="onImageError(item)"
                             (click)="onGetItem(item)" />
                         <div class="w-4"></div>
                         <div class="flex grow flex-col">
@@ -21,6 +24,9 @@
                         <div class="w-24 pt-8 text-red-500" (click)="onDelete(i)">
                             <mat-icon fontIcon="delete"></mat-icon>
                         </div>
+                        @if (item.imageError) {
+                            <div class="text-red-500 text-xs">Error al cargar imagen</div>
+                        }
                     </div>
                 }
             </div>

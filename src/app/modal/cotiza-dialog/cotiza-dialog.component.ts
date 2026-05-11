@@ -148,6 +148,10 @@ export class CotizaDialogComponent implements OnInit {
     */
   }
 
+  onImageError(item: Item) {
+    (item as any).imageError = true;
+  }
+
   onGetItem(item: Item) {
     this.storage.filter = {seltype: 2, familia: item.familia, catalogTitle: item.itemTag?.origen, catFilter: ['Producto',item.descripcion_comercial]}
     this.close()

@@ -21,7 +21,7 @@ export interface Filter {
 })
 export class LocalstorageService {
   readonly DEV_STATUS=true;
-  readonly QUOTE_SERVER = this.DEV_STATUS? 'http://localhost:3000/' : `https://${window.location.hostname}/`; // 'https://omv-production.up.railway.app/'; // 'https://catalogos.omvpublicidadsas.com/';
+  readonly QUOTE_SERVER = this.DEV_STATUS? 'http://localhost:3000/' : `https://${window.location.hostname}/`;
   // readonly QUOTE_SERVER = 'http://localhost:3000/'; // 'https://omv-production.up.railway.app/'; // 'https://catalogos.omvpublicidadsas.com/';
   selMenu = [0, -1];
   // menuNm = '';
@@ -188,7 +188,7 @@ export class LocalstorageService {
 
   async resolveDataMARPICO(data: Item[]) {
     this.categTree = [];
-
+debugger;
     
     data.forEach((item: any) => {
       
@@ -219,8 +219,15 @@ export class LocalstorageService {
       const categ = catList.categoria.nombre;
       */
       
-      item.subcategoria_1.categoria = this.addToCatMARPICOTreeSimple(item.subcategoria_1.categoria, item.subcategoria_1.nombre);
-      item.subcategoria_1 = { jerarquia: item.subcategoria_1.jerarquia, nombre: item.subcategoria_1.nombre, categoria: { jerarquia: item.subcategoria_1.categoria, nombre: item.subcategoria_1.categoria } };
+      // Extraemos el nombre de la categoría ya procesado por el backend
+      const categoryName = item.subcategoria_1.categoria.nombre || item.subcategoria_1.categoria;
+      
+      // Usamos el método unificado para construir el árbol
+      this.addToCatTreeSimple(categoryName, item.subcategoria_1.nombre);
+    
+      // Normalizamos el objeto para el resto de la aplicación
+      // no va. mirar el uso real
+      // item.subcategoria_1.categoria = categoryName;
     });
     this.sortCat();
   }

@@ -37,11 +37,12 @@ export class AppComponent {
 
   navObserver() {
     this.nvg.getRouteDetailObs().subscribe(navDeta => {
-
       if (navDeta.tag && navDeta.tag.length > 0) {
-        this.router.navigate([navDeta.route, navDeta.tag], { skipLocationChange: true }); // .catch(rason => console.log(rason));
+        this.router.navigate([navDeta.route, navDeta.tag], { skipLocationChange: true })
+          .catch(err => console.error('Navigation error:', err));
       } else {
-        this.router.navigate([navDeta.route], { skipLocationChange: true });// this.router.navigate([`/${navDeta.route}`]); // .catch(rason => console.log(rason));
+        this.router.navigate([navDeta.route], { skipLocationChange: true })
+          .catch(err => console.error('Navigation error:', err));
       }
       // this.router.navigate([`/myPage/`], { relativeTo: this.route, skipLocationChange: true })
     });

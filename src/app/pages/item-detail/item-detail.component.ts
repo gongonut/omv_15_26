@@ -14,6 +14,7 @@ import { DialogData, DialogService } from '../../services/dialog.service';
 
 @Component({
   selector: 'app-item-detail',
+  standalone: true,
   templateUrl: './item-detail.component.html',
   styleUrls: ['./item-detail.component.scss'],
   imports: [MatFormFieldModule, MatIconModule, DecimalPipe, MatBadgeModule, MatSelectModule]
@@ -39,6 +40,13 @@ export class ItemDetailComponent implements OnInit, OnDestroy {
   bagSubs!: Subscription;
 
   ngOnInit() {
+    // Si no hay item, intentamos recuperar o redirigir
+    if (!this.storage.selItem) {
+      console.warn('No hay item seleccionado, redirigiendo...');
+      this.goBack();
+      return;
+    }
+
     this.getImageLists();
     this.SelImg = this.imageXLList[0] || '';
     this.badgeObs();
@@ -58,17 +66,21 @@ export class ItemDetailComponent implements OnInit, OnDestroy {
 
   private getImageLists(code: string = '') {
 
-    // console.log( typeof( this.selMaterial));
+    if (!this.storage.selItem) return;
+
     this.imageList = [];
     this.imageOptionList = [{ codigo: '', nombre: 'Todo' }];
-    this.storage.selItem.materiales.forEach(mti => {
+    this.storage.selItem.materiales?.forEach(mti => {
       this.imageOptionList.push({ codigo: mti.codigo, nombre: mti.color_nombre });
     });
     if (code.length === 0) {
 
-      this.selMaterial = this.storage.selItem.materiales[-1];
+      // Corregido: .materiales[-1] es incorrecto y devuelve undefined. 
+      // Lo dejamos como undefined para que add2Cotiza pida selección.
+      this.selMaterial = undefined as any; 
+
       if (this.storage.selItem.imagenes) { this.imageList = [...this.storage.selItem.imagenes]; }
-      this.storage.selItem.materiales.forEach(mat => {
+      this.storage.selItem.materiales?.forEach(mat => {
         this.imageList = [...this.imageList, ...mat.imagenes];
       });
       /*
@@ -99,6 +111,7 @@ export class ItemDetailComponent implements OnInit, OnDestroy {
   }
 
   getInventario(): number {
+    if (!this.storage.selItem) return 0;
     if (this.selMaterial) {
       return this.selMaterial.inventario || 0
     } else {

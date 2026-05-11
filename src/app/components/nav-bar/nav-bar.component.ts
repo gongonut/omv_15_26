@@ -55,6 +55,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
     private snkBar: MatSnackBar) { }
 
   ngOnInit(): void {
+    
     this.nvg.setReady();
     this.badgeObs();
   }
@@ -77,6 +78,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
   }
 
   onMenuNav(index: number) {
+    
     this.storage.selMenu[0] = index;
     this.storage.selMenu[1] = -1;
     this.storage.filter.seltype = 4;
@@ -89,6 +91,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
         arute = 'home';
         break;
     }
+    
     this.nvg.onRouteDetail('', '', arute, true);
   }
 

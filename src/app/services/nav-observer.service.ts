@@ -47,7 +47,7 @@ export class NavObserverService {
   */
 
   onRouteDetail(title: string, icon: string, route: string, back: boolean, tag: string = '') {
-
+    ;
     if (!this.getReady()) return;
     // if (sidenav) {this.sidenav = !this.sidenav; return;}
     this.comeFromPage = this.router.url;

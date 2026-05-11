@@ -33,7 +33,9 @@ export class CatalogComponent {
   }
 
   onSelSub(tit: string, sub: string) {
+    console.log('CatalogComponent onSelSub', tit, sub);
     const filter: Filter = {seltype: 0, catFilter: [tit,sub]};
+    
     this.filterSelected.emit(filter);
   }
 

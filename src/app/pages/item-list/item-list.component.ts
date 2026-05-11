@@ -26,7 +26,6 @@ import { Item } from '../../datatypes';
     ItemComponent,
     CatalogModule,
     NavBarComponent,
-    ItemComponent
 ]
 })
 export class ItemListComponent implements OnInit {
@@ -47,7 +46,7 @@ export class ItemListComponent implements OnInit {
   }
 
   async ngOnInit() {
-
+    
     // await this.http_omv.getMARPICO();
     if (this.storage.itemList2Show.length === 0) {
       
@@ -55,6 +54,7 @@ export class ItemListComponent implements OnInit {
       this.storage.selMenu = [0, 0];
       title: 'Marpico';
       this.storage.filter = { seltype: 0, catFilter: ['Seleccione una categoría', '...'] };
+      
       await this.http_omv.getMARPICOCatsDataPromise('MARPICO');
       this.catList = this.storage.categTree;
 
@@ -64,8 +64,9 @@ export class ItemListComponent implements OnInit {
   }
 
   onFilterSelected(filter: Filter) {
-    debugger;
+    
     // console.log(filter);
+    
     this.storage.filter = filter;
     this.catView = false;
     
@@ -86,16 +87,19 @@ export class ItemListComponent implements OnInit {
   }
 
   async onSelected(event: any) {
+    
     this.nvg.showProgress = true;
     switch (this.storage.selMenu[1]) {
 
       case 0: // Marpico
         title: 'Marpico';
         this.storage.filter = { seltype: 0, catFilter: ['Seleccione una categoría', '...'] };
+        
         await this.http_omv.getMARPICOCatsDataPromise('MARPICO');
         break;
 
       case 1: // OMV
+      
         title: 'omv';
         this.storage.filter = { seltype: 0, catFilter: ['Seleccione una categoría', '...'] };
         await this.http_omv.getOMVCatsDataPromise('OMV');
@@ -113,9 +117,11 @@ export class ItemListComponent implements OnInit {
 
     switch (this.storage.filter.catalogTitle) {
       case 'MARPICO': // Marpico
+      
         await this.http_omv.getMARPICOCatsDataPromise('MARPICO');
         break;
       case 'OMV': // OMV
+
         await this.http_omv.getOMVCatsDataPromise('OMV');
         break;
     }
@@ -134,7 +140,7 @@ export class ItemListComponent implements OnInit {
       this.dg.aShowCateg(ddta).subscribe((result: any) => {
 
         if (result) {
-          debugger;
+          
           this.storage.filter = result as Filter;
           this.catView = false;
         }
