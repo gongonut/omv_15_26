@@ -188,7 +188,7 @@ export class LocalstorageService {
 
   async resolveDataMARPICO(data: Item[]) {
     this.categTree = [];
-debugger;
+
     
     data.forEach((item: any) => {
       

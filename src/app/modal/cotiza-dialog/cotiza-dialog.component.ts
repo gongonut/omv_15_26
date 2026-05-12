@@ -7,6 +7,7 @@ import {NgxImageCompressService} from 'ngx-image-compress';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIcon } from '@angular/material/icon';
 import { DecimalPipe } from '@angular/common';
+import { MatButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { DynamicFormComponent, JsonFormData } from '../../components/dynamic-form/dynamic-form.component';
 import { LocalstorageService } from '../../services/localstorage.service';
@@ -16,7 +17,7 @@ import { Item } from '../../datatypes';
   selector: 'app-cotiza-dialog',
   templateUrl: './cotiza-dialog.component.html',
   styleUrls: ['./cotiza-dialog.component.scss'],
-  imports: [MatIcon, DecimalPipe, DynamicFormComponent, MatCheckbox]
+  imports: [MatIcon, DecimalPipe, DynamicFormComponent, MatCheckbox, MatButton]
 })
 export class CotizaDialogComponent implements OnInit {
 
@@ -109,7 +110,7 @@ export class CotizaDialogComponent implements OnInit {
     
   }
   ngOnInit(): void {
-    
+    debugger;
     if (this.data.value.itemList.error && this.data.value.itemList.error.length > 0) {
       this.snkBar.open(this.data.value.itemList.error.length, 'Ok', { duration: 3000 })
     }

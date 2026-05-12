@@ -55,26 +55,26 @@
         }
     </div>
 
-    <div class="flex p-3 justify-end  border-t border-black">
-        <button mat-stroked-button (click)="close()">
-            <mat-icon color="warn">done</mat-icon>
+    <div class="flex p-4 justify-end gap-3 border-t border-gray-200 bg-gray-50">
+        <button mat-button (click)="close()">
+            <mat-icon>close</mat-icon>
+            Cerrar
         </button>
-        &nbsp;
+
         @if (data && data.tag === '1') {
-            <span>
+            <div class="flex gap-2">
                 <button mat-stroked-button color="primary" (click)="onSelPage()">
-                    <mat-icon>chevron_left</mat-icon>
+                    <mat-icon>{{ page === 0 ? 'person' : 'list' }}</mat-icon>
                     {{btnName()}}
-                    <mat-icon>chevron_right</mat-icon>
                 </button>
-                &nbsp;
+
                 @if (valid) {
-                    <button mat-stroked-button color="primary" (click)="onAccept()">
-                        <mat-icon color="warn">done</mat-icon>
-                        Enviar
+                    <button mat-flat-button color="primary" (click)="onAccept()">
+                        <mat-icon>send</mat-icon>
+                        Enviar Cotización
                     </button>
                 }
-            </span>
+            </div>
         }
     </div>
 </div>

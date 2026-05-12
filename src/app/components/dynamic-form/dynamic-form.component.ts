@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
 import { MatIcon } from '@angular/material/icon';
 import { MatCheckbox } from '@angular/material/checkbox';
 
@@ -33,7 +34,7 @@ export interface JsonFormControl {
   type: string;
   description?: string;
   sideBtn?: string; // si type Link, ruta
-  style?: {};
+  style?: any;
   default?: any;
   selectOptions?: SelOptions[];
   totalRows?: number;
@@ -48,7 +49,7 @@ export interface JsonFormData {
 @Component({
   selector: 'app-dynamic-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatSelectModule, MatIcon, MatCheckbox],
+  imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatIcon, MatCheckbox],
   templateUrl: './dynamic-form.component.html',
   styleUrls: ['./dynamic-form.component.scss']
 })
@@ -68,26 +69,22 @@ export class DynamicFormComponent implements OnChanges {
   constructor(private fb: FormBuilder) { }
 
   ngOnChanges(changes: SimpleChanges) {
-    
-    // console.log(changes);
-    if (changes['reset'] && !changes['reset'].firstChange && this.jsonFormData && this.jsonFormData.controls) {
-      const currentValues = changes['values'] ? changes['values'].currentValue : this.values;
-      this.createForm(this.jsonFormData.controls, currentValues);
-    } else if (changes['jsonFormData'] && !changes['jsonFormData'].firstChange
-      && this.jsonFormData && this.jsonFormData.controls
-      && changes['values'] && !changes['values'].firstChange) {
-      this.createForm(this.jsonFormData.controls, changes['values'].currentValue);
-    } else if (changes['values'] && !changes['values'].firstChange) {
-      this.editValues(changes['values'].currentValue);
-    } else {
-      if (this.jsonFormData && this.jsonFormData.controls) { this.createForm(this.jsonFormData.controls, null); }
+    debugger;
+    const jsonChanged = !!changes['jsonFormData'];
+    const resetTriggered = !!changes['reset'] && !changes['reset'].firstChange;
+    const valuesChanged = !!changes['values'] && !changes['values'].firstChange;
+
+    // Recreamos el formulario si cambia la estructura (jsonFormData) o si se pide un reset
+    if (jsonChanged || resetTriggered) {
+      if (this.jsonFormData && this.jsonFormData.controls) {
+        this.createForm(this.jsonFormData.controls, this.values);
+      }
+    } 
+    // Si solo cambian los valores y el formulario ya existe, actualizamos los campos
+    else if (valuesChanged) {
+      this.editValues(this.values);
     }
     this.onSetData();
-    /*
-    if (!changes['jsonFormData'].firstChange) {
-      this.createForm(this.jsonFormData.controls);
-    }
-    */
   }
 
   private editValues(values: any) {
@@ -95,11 +92,10 @@ export class DynamicFormComponent implements OnChanges {
   }
 
   private createForm(controls: JsonFormControl[], reset: any = null) {
-
-    const deleteList = { ...this.dynaForm.value };
-    const resultList = reset ? reset : JSON.parse(JSON.stringify(this.dynaForm.value));
-    // const resultList = JSON.parse(JSON.stringify(this.dynaForm.value));
-    for (const key in deleteList) { this.dynaForm.removeControl(key); }
+    // Limpiamos los controles actuales para evitar duplicados al recrear
+    Object.keys(this.dynaForm.controls).forEach(key => {
+      this.dynaForm.removeControl(key);
+    });
 
     for (const control of controls) {
       const validatorsToAdd = [];
@@ -135,8 +131,8 @@ export class DynamicFormComponent implements OnChanges {
       }
 
       
-      if (resultList[control.name] && resultList[control.name].length > 0) {
-        control.avalue = resultList[control.name];
+      if (reset && reset[control.name] !== undefined) {
+        control.avalue = reset[control.name];
       } else {
         if (this.values && this.values[control.name] !== undefined) {
           control.avalue = this.values[control.name]
