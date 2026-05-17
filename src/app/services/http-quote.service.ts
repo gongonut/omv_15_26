@@ -92,7 +92,7 @@ export class HttpQuoteService {
       
       const data = await firstValueFrom(this.getOMARPICOCats());
       this.storage.itemList2Show = data as Item[];
-      console.log('MARPICO cats fetched:', this.storage.itemList2Show);
+      // console.log('MARPICO cats fetched:', this.storage.itemList2Show);
       // CORRECCIÓN: Llamar al resolver de MARPICO
       if (this.storage.itemList2Show.length > 0) { await this.storage.resolveDataMARPICO(this.storage.itemList2Show); }
       this.storage.selCatalogTitle = catName;

@@ -110,7 +110,7 @@ export class CotizaDialogComponent implements OnInit {
     
   }
   ngOnInit(): void {
-    debugger;
+    
     if (this.data.value.itemList.error && this.data.value.itemList.error.length > 0) {
       this.snkBar.open(this.data.value.itemList.error.length, 'Ok', { duration: 3000 })
     }

@@ -69,7 +69,7 @@ export class DynamicFormComponent implements OnChanges {
   constructor(private fb: FormBuilder) { }
 
   ngOnChanges(changes: SimpleChanges) {
-    debugger;
+    
     const jsonChanged = !!changes['jsonFormData'];
     const resetTriggered = !!changes['reset'] && !changes['reset'].firstChange;
     const valuesChanged = !!changes['values'] && !changes['values'].firstChange;
